@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<!-- Login page that submits information and sends to the "reg_user function" -->
+
+<!-- Bootstrap CDN link -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+<!-- Div that carries the Create User form. Made to fit center of the screen -->
+<div class="center-screen">
+<h1> Create User </h1>
+<p>Enter your details to create a new user in the system</p>
+
+<!-- Create User Form -->
+<form id="create_user" action="{% url 'erp_system:reg_user' %}" method="post">
+
+    {% csrf_token %}
+
+<!-- Form body with data inputs for posting request -->
+    <table>
+        <tr>
+            <td>
+                <label class="col-form-label" for="first_name">First Name</label>
+            </td>
+            <td>
+                <input class="form-control" type="first_name" name="first_name">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label class="col-form-label" for="">Last Name</label>
+            </td>
+            <td>
+                <input class="form-control" type="last_name" name="last_name">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label class="col-form-label" for="">Email</label>
+            </td>
+            <td>
+                <input class="form-control" type="email" name="email">
+            </td>
+        </tr>
+        <tr><td><br></td></tr>
+        <tr>
+            <td>
+                <label class="col-form-label" for="username">Username</label>
+            </td>
+            <td>
+                <input class="form-control" type="text" name="username" required>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label class="col-form-label" for="password">Password</label>
+            </td>
+            <td>
+                <input class="form-control" type="password" name="password" required>
+            </td>
+        </tr>
+
+    </table>
+
+
+</form>
+<br/>
+<!-- Add a button to move back to the view users page -->
+<a href="/view_users"><input class="btn btn-outline-primary" type="submit" value="Go Back"  /></a> 
+<input class="btn btn-success" type="submit" value="Add User" for="create_user" />
+</div>
+
+
+
+<!-- CSS styling -->
+<style>
+    .center-screen {
+        border: 1px solid;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 10px;
+      }
+</style>

@@ -1,0 +1,133 @@
+<!-- A simple form (in table format) for the user to input the changes they want on the inventory item -->
+
+{% extends "header.html" %}
+
+{% block content %}
+<h1>Edit Inventory</h1>
+
+<!-- Edit Inventory Form -->
+<form id="edit_inventory" action="{% url 'erp_system:update_inventory' inventory.id %}" method='post'>
+    {% csrf_token %}
+    <table class="table table-bordered">
+        <caption>Edit Inventory Form</caption>
+
+        <tr>
+            <td class="table-dark">
+                <label for="sku">SKU:</label>
+            </td>
+            <td>
+                <input type="textbox" name="sku" id="sku" value="{{ inventory.sku }}">
+            </td>
+            <td colspan=4 class="table-dark"></td>
+        </tr>
+        <tr>
+            <td class="table-dark">
+                <label for="category_1">category_1:</label>
+            </td>
+            <td>
+                <input type="textbox" name="category_1" id="category_1" value="{{ inventory.category_1 }}">
+            </td>
+            <td class="table-dark">
+                <label for="category_2">category_2:</label>
+            </td>
+            <td>
+                <input type="textbox" name="category_2" id="category_2" value="{{ inventory.category_2 }}">
+            </td>
+            <td class="table-dark">
+                <label for="category_3">category_3:</label>
+            </td>
+            <td>
+                <input type="textbox" name="category_3" id="category_3" value="{{ inventory.category_3 }}">               
+            </td>
+        </tr>
+
+        <tr>
+            <td class="table-dark">
+                <label for="attribute_1">attribute_1:</label>
+            </td>
+            <td>
+                <input type="textbox" name="attribute_1" id="attribute_1" value="{{ inventory.attribute_1 }}">
+            </td>
+            <td class="table-dark">
+                <label for="attribute_2">attribute_2:</label>
+            </td>
+            <td>
+                <input type="textbox" name="attribute_2" id="attribute_2" value="{{ inventory.attribute_2 }}">
+            </td>
+            <td class="table-dark">
+                <label for="attribute_3">attribute_3:</label>
+            </td>
+            <td>
+                <input type="textbox" name="attribute_3" id="attribute_3" value="{{ inventory.attribute_3 }}">
+            </td>
+        </tr>
+
+        <tr>
+            <td class="table-dark">
+                <label for="description">description:</label>
+            </td>
+            <td>
+                <textarea name="description" id="description">{{inventory.description}}</textarea>
+            </td>
+            <td colspan=4 class="table-dark"></td>
+        </tr>
+
+        <tr>
+            <td class="table-dark">
+                <label for="retail_price">retail_price:</label>
+            </td>
+            <td>
+                <input type="textbox" name="retail_price" id="retail_price" value="{{ inventory.retail_price }}">
+            </td>
+                <td class="table-dark">
+                    <label for="branch_price">branch_price:</label>
+                </td>
+                <td>
+                    <input type="textbox" name="branch_price" id="branch_price" value="{{ inventory.branch_price }}">
+                </td>
+                <td class="table-dark">
+                    <label for="cost_price">cost_price:</label>
+                </td>
+                <td>
+                    <input type="textbox" name="cost_price" id="cost_price" value="{{ inventory.cost_price }}">
+                </td>
+        </tr>
+        <tr>
+            <td class="table-dark">
+                <label for="supplier_name">supplier_name:</label>
+            </td>
+            <td>
+                <input type="textbox" name="supplier_name" id="supplier_name" value="{{ inventory.supplier_name }}">
+            </td>
+            <td colspan=4 class="table-dark"></td>
+        </tr>
+        <tr>
+            <td class="table-dark">
+                <label for="backorder_qty">backorder_qty:</label>
+            </td>
+            <td>
+                <input type="textbox" name="backorder_qty" id="backorder_qty" value="{{ inventory.backorder_qty }}">
+            </td>
+            <td colspan=4 class="table-dark"></td>
+        </tr>
+        <tr>
+            <td class="table-dark">
+                <label for="stock_available">stock_available:</label>
+            </td>
+            <td>
+                <input type="textbox" name="stock_available" id="stock_available" value="{{ inventory.stock_available }}">
+            </td>
+            <td colspan=4 class="table-dark"></td>
+        </tr>
+
+        </td></tr>
+        
+    </table>
+</form>
+
+<form id="go_back" action="/view_inventories/"></form>
+
+<!-- inputs linked to it's form. An extra button created for user to go back to the inventories view -->
+<input class="btn btn-success" type="submit" value="Save" form="edit_inventory" />
+<input class="btn btn-outline-primary" type="submit" value="Go back" form="go_back" />
+{% endblock %}

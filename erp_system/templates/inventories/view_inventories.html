@@ -1,0 +1,64 @@
+<!-- Inventory Data Table View -->
+
+{% extends "header.html" %}
+
+{% block content %}
+
+<!-- TODO : ADD SEARCH FUNCTIONALITY -->
+
+
+<h2> View Inventories</h2>
+<!-- Table to view inventory list -->
+
+<br />
+<form id="add_inventory" action="{% url 'erp_system:add_inventory'%}" method="post">
+    {% csrf_token %}
+    <input class="btn btn-success" type="submit" form="add_inventory" value="ADD INVENTORY">
+</form>
+<br />
+
+<table class="table table-striped table-hover table-bordered">
+    <caption>List of Inventory Records</caption>
+    <!-- Table Headers -->
+    <thead>
+    <tr class="table-dark">
+        <td>ID</td>
+        <td>SKU</td>
+        <td>CATEGORIES</td>
+        <td>DESCRIPTION</td>
+        <td>ATTRIBUTES</td>
+        <td>R/PRICE</td>
+        <td>B/PRICE</td>
+        <td>C/PRICE</td>
+        <td>SUPPLIER</td>
+        <td>BACKORDER</td>
+        <td>QTY</td>
+        <td colspan="2">ACTIONS</td>
+    </tr>
+    </thead>
+    <!-- Generate Table data with inventory data -->
+    <tbody>
+    {% for inventory in latest_inventory_list %}
+    <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>{{ inventory.sku }}</td>
+        <td>{{ inventory.category_1 }} | {{ inventory.category_2 }} | {{ inventory.category_3 }}</td>
+        <td>{{ inventory.description }}</td>
+        <td>{{ inventory.attribute_1 }} | {{ inventory.attribute_2 }} | {{ inventory.attribute_3 }}</td>
+        <td>R{{ inventory.retail_price }}</td>
+        <td>R{{ inventory.branch_price }}</td>
+        <td>R{{ inventory.cost_price }}</td>
+        <td>{{ inventory.supplier_name }}</td>
+        <td>{{ inventory.backorder_qty }}</td>
+        <td>{{ inventory.stock_available }}</td>
+        <td><a href="{% url 'erp_system:edit_inventory' inventory.id %}"><input class="btn btn-outline-success" type="submit" value="UPDATE" ></a></td>
+        <td><a href="{% url 'erp_system:delete_inventory' inventory.id %}"><input class="btn btn-outline-danger" type="submit" value="DELETE" ></a></td>
+    </tr>
+    {% endfor %}
+</tbody>
+<tfoot>
+</tfoot>
+</table>
+
+{% endblock %} 
+

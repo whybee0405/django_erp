@@ -1,0 +1,56 @@
+{% extends "header.html" %}
+
+{% block content %}
+
+<!-- This page shows the list of users from the system on the front-end -->
+
+<!-- TODO : ADD SEARCH FUNCTIONALITY -->
+
+
+<h2> View Users</h2>
+
+<!-- Button for access the Create User page -->
+<br/>
+<form id="add_user" action="{% url 'erp_system:add_user'%}">
+    <input class="btn btn-success" type="submit" form="add_user" value="Create New User">
+</form>
+<br/>
+
+<!-- Table to view all users list -->
+<table class="table table-striped table-hover table-bordered">
+    <caption>List of System Users</caption>
+    <!-- Table Headers -->
+    <thead>
+    <tr class="table-dark">
+        <td>ID</td>
+        <td>USERNAME</td>
+        <td>FIRST NAME</td>
+        <td>LAST NAME</td>
+        <td>EMAIL</td>
+        <td>IS_STAFF</td>
+        <td>IS_ACTIVE</td>
+        <td>DATE_JOINED</td>
+        <td colspan="2">ACTIONS</td>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Generate Table data with user data -->
+    {% for user in latest_users_list %}
+    <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>{{ user.username }}</td>
+        <td>{{ user.first_name }}</td>
+        <td>{{ user.last_name }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.is_staff }}</td>
+        <td>{{ user.is_active }}</td>
+        <td>{{ user.date_joined }}</td>
+        <td><a href="{% url 'erp_system:edit_user' user.id %}"><input class="btn btn-outline-success" type="submit" value="UPDATE" ></a></td>
+        <td><a href="{% url 'erp_system:delete_user' user.id %}"><input class="btn btn-outline-danger" type="submit" value="DELETE" ></a></td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %} 
+

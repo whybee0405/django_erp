@@ -1,0 +1,31 @@
+<!-- HOME PAGE / DASHBOARD -->
+{% extends "header.html" %}
+
+{% block content %}
+
+<h3> DASHBOARD</h3>
+<br/>
+<!-- Check to see if user is authenticated and print username accordingly -->
+{% if user.is_authenticated %}
+    <p>Welcome, {{ user.username }}!</p>
+{% else %}
+    <p>Please log in.</p>
+{% endif %}
+
+<br/>
+
+<!-- Dummy data -->
+<h5>Today's Quote:</h5>
+<pre>
+    Simplicity requires a two-step process. 
+    First, we must invest time and energy to discover what stirs us as human beings, 
+    what makes our hearts sing, and what brings us joy. 
+    Then, we must proceed to create the life that reflects the unique people we truly are. 
+    This is the heart and soul of simplicity. Linda Breen Pierce, Choosing Simplicity
+</pre>
+
+<h5>Recent Events:</h5>
+
+<!-- TODO add some graphs and tables to the dashboard -->
+
+{% endblock %} 
