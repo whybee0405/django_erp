@@ -4,6 +4,7 @@ from django.db import models
 
 # Base (non-normalized) Inventory data table
 class Inventory(models.Model):
+    """Inventory objects that contains descriptions, price and other properties of stock"""
     id = models.AutoField(primary_key=True)
     sku = models.CharField(max_length=30, unique=True)
     category_1 = models.CharField(max_length=100)
