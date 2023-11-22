@@ -7,24 +7,28 @@ from django.contrib.auth import authenticate, login
 # Create your views here.
 
 def login_page(request):
+    """Return html rendered view for login page"""
     return render(request, 'auth/login.html')
 
 def index(request):
+    """Return html rendered view of Home page and Dashboard"""
     latest_inventory_list = Inventory.objects.order_by('id')
     context = {'latest_inventory_list':latest_inventory_list}
     return render(request, 'index.html', context)
 
-def view_inventories(request): #Renders a list of inventories in View Inventories view
+def view_inventories(request):
+    """Return html rendered view of Inventory list view with Inventory objects"""
     latest_inventory_list = Inventory.objects.order_by('id')
     context = {'latest_inventory_list':latest_inventory_list}
     return render(request, 'inventories/view_inventories.html', context)
 
-def edit_inventory(request, inventory_id): #Renders Edit Inventory form view
+def edit_inventory(request, inventory_id):
+    """Return html rendered view of Edit Inventory page with Inventory objects"""
     inventory = get_object_or_404(Inventory, pk=inventory_id)
     return render(request, 'inventories/edit_inventory.html', {'inventory':inventory})
 
-def update_inventory(request, inventory_id): #Function to update inventory depending on the request on the front end form. Redirect back to inventories view
-    # TODO : Proper error handling needs to be done
+def update_inventory(request, inventory_id):
+    """Function to update inventory depending on the request on the front end form. Redirect back to inventories view""" 
     inventory = get_object_or_404(Inventory, pk=inventory_id)
     inventory.sku = request.POST['sku']
     inventory.category_1 = request.POST['category_1']
@@ -43,17 +47,20 @@ def update_inventory(request, inventory_id): #Function to update inventory depen
             reverse('erp_system:view_inventories')
         )
     
-def delete_inventory(request, inventory_id): #Function to delete a selected inventory item
+def delete_inventory(request, inventory_id):
+    """Function to delete a selected inventory item"""
     inventory = get_object_or_404(Inventory, pk=inventory_id)
     inventory.delete()
     return HttpResponseRedirect(
             reverse('erp_system:view_inventories')
         )
     
-def add_inventory(request): #Function to insert a new inventory record
+def add_inventory(request): 
+    """Return html rendered view of Inventory Add page"""
     return render(request, 'inventories/add_inventory.html')
 
 def reg_inventory(request):
+    """Function to register a new inventory record"""
     inventory = Inventory(
     sku = request.POST['sku'],
     category_1 = request.POST['category_1'],
@@ -74,6 +81,7 @@ def reg_inventory(request):
     )
 
 def auth_user(request):
+    """Function to authenticate user into index page from login page"""
     username = request.POST['username']
     password = request.POST['password']
     user = authenticate(username=username, password=password)
@@ -88,14 +96,17 @@ def auth_user(request):
         )
 
 def view_users(request):
+    """Return html rendered view of list of Users"""
     latest_users_list = User.objects.order_by('id')
     context = {'latest_users_list':latest_users_list}
     return render(request, 'config/users.html', context)
 
 def add_user(request):
+    """Return html rendered view of User Add view"""
     return render(request, 'config/user_add.html')
 
 def reg_user(request):
+    """Function to register a new user into system"""
     username = request.POST['username']
     password = request.POST['password']
     user = User.objects.create_user(username=username, password=password)
