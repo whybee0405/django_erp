@@ -2,7 +2,7 @@ import os
 import sys
 import django
 sys.path.insert(0, os.path.abspath('..'))
-os.environ['DJANGO_SETTINGS_MODULE'] = 'erp_system.settings'
+os.environ['DJANGO_SETTINGS_MODULE'] = 'ERP_project.settings'
 django.setup()
 
 # Configuration file for the Sphinx documentation builder.
